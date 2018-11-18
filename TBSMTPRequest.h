@@ -12,7 +12,7 @@
 @class TBSMTPMessage;
 
 @interface TBSMTPRequest : NSObject {
-	NSString *_rawString;
+    NSString *_rawString;
 }
 
 

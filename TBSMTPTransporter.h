@@ -27,19 +27,19 @@ typedef NSInteger TBSMTPProtocolProgressIndicator;
  */
 @interface TBSMTPTransporter : NSOperation {
 
-	TBSMTPProtocolProgressIndicator _protocolProgressIndicator;
-	TBSMTPMessage		*_message;
-	TBSMTPServer		*_server;
-	NSError				*_error;
-	TBSMTPResponse		*_lastResponse;
-	TBSMTPRequest		*_lastRequest;
+    TBSMTPProtocolProgressIndicator _protocolProgressIndicator;
+    TBSMTPMessage		*_message;
+    TBSMTPServer		*_server;
+    NSError				*_error;
+    TBSMTPResponse		*_lastResponse;
+    TBSMTPRequest		*_lastRequest;
 
-	GCDAsyncSocket		*_socket;
+    GCDAsyncSocket		*_socket;
 
-	dispatch_queue_t		_connectionQueue;
-	dispatch_semaphore_t	_connectionSemaphore;
-	dispatch_semaphore_t	_readSemaphore;
-	dispatch_semaphore_t	_writeSemaphore;
+    dispatch_queue_t		_connectionQueue;
+    dispatch_semaphore_t	_connectionSemaphore;
+    dispatch_semaphore_t	_readSemaphore;
+    dispatch_semaphore_t	_writeSemaphore;
 }
 
 

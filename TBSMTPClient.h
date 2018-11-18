@@ -43,7 +43,7 @@ typedef void(^TBSMTPCompletionBlock)(BOOL success, NSError *error);
  has no impact on the calling thread.
  */
 @interface TBSMTPClient : NSObject {
-	NSOperationQueue *_messagesProcessingQueue;
+    NSOperationQueue *_messagesProcessingQueue;
 }
 
 

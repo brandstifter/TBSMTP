@@ -58,7 +58,7 @@
  */
 @interface TBSMTPAuthenticatorCRAMMD5 : TBSMTPAuthenticator <TBSMTPAuthenticatorInterface> {
 
-	NSString *_challangeStringOfRoundTrip1;
+    NSString *_challangeStringOfRoundTrip1;
 }
 
 /**
@@ -126,7 +126,7 @@
  */
 @interface TBSMTPAuthenticatorLOGIN : TBSMTPAuthenticator <TBSMTPAuthenticatorInterface> {
     
-	NSString *_challangeStringOfRoundTrip1;
+    NSString *_challangeStringOfRoundTrip1;
     NSString *_challangeStringOfRoundTrip2;
 }
 
@@ -171,10 +171,10 @@
 
 - (id)initWithAuthenticationScheme:(TBSMTPAuthenticationScheme)authenticationScheme andCredentialsProvider:(id<TBSMTPAuthenticatorCredentialsProvider>)credentialsProvider {
 
-	self = [super init];
+    self = [super init];
     if (self) {
         _authenticationScheme = authenticationScheme;
-		_credentialsProvider = credentialsProvider;
+        _credentialsProvider = credentialsProvider;
     }
     return self;
 }
@@ -182,12 +182,12 @@
 
 + (id)authenticatorWithAuthenticationScheme:(TBSMTPAuthenticationScheme)authenticationScheme andCredentialsProvider:(id<TBSMTPAuthenticatorCredentialsProvider>)credentialsProvider {
 
-	switch (authenticationScheme) {
-		case TBSMTPAuthenticationScheme_CRAM_MD5: {
+    switch (authenticationScheme) {
+        case TBSMTPAuthenticationScheme_CRAM_MD5: {
 
-			return [[[TBSMTPAuthenticatorCRAMMD5 alloc] initWithAuthenticationScheme:authenticationScheme andCredentialsProvider:credentialsProvider] autorelease];
-		}
-			break;
+            return [[[TBSMTPAuthenticatorCRAMMD5 alloc] initWithAuthenticationScheme:authenticationScheme andCredentialsProvider:credentialsProvider] autorelease];
+        }
+            break;
             
         case TBSMTPAuthenticationScheme_Login: {
             return [[[TBSMTPAuthenticatorLOGIN alloc] initWithAuthenticationScheme:authenticationScheme andCredentialsProvider:credentialsProvider] autorelease];
@@ -195,12 +195,12 @@
         }
             break;
 
-		case TBSMTPAuthenticationScheme_None:
-			// fall through
-		default:
-			return nil;
-			break;
-	}
+        case TBSMTPAuthenticationScheme_None:
+            // fall through
+        default:
+            return nil;
+            break;
+    }
 
 }
 
@@ -209,17 +209,17 @@
 
 - (NSUInteger)numberOfRoundTrips {
 
-	@throw(kAbstractMethodException); // should never happen
+    @throw(kAbstractMethodException); // should never happen
 }
 
 - (void)authenticationChallengeString:(NSString *)challengeString forRoundTrip:(NSUInteger)roundTrip {
 
-	@throw(kAbstractMethodException); // should never happen
+    @throw(kAbstractMethodException); // should never happen
 }
 
 - (NSString *)authenticationResponseStringForRoundTrip:(NSUInteger)roundTrip {
 
-	@throw(kAbstractMethodException); // should never happen
+    @throw(kAbstractMethodException); // should never happen
 }
 
 @end
@@ -235,18 +235,18 @@
 
 
 - (void)dealloc {
-	[_challangeStringOfRoundTrip1 release]; _challangeStringOfRoundTrip1 = nil;
-	[super dealloc];
+    [_challangeStringOfRoundTrip1 release]; _challangeStringOfRoundTrip1 = nil;
+    [super dealloc];
 }
 
 - (NSUInteger)numberOfRoundTrips {
-	return 1;
+    return 1;
 }
 
 
 - (void)authenticationChallengeString:(NSString *)challengeString forRoundTrip:(NSUInteger)roundTrip {
 
-	self.challangeStringOfRoundTrip1 = (roundTrip == 1) ? challengeString : nil;
+    self.challangeStringOfRoundTrip1 = (roundTrip == 1) ? challengeString : nil;
 }
 
 /**
@@ -256,24 +256,24 @@
  */
 - (NSString *)authenticationResponseStringForRoundTrip:(NSUInteger)roundTrip {
 
-	NSString *username = self.credentialsProvider.username ? self.credentialsProvider.username : @"";
-	NSString *password = self.credentialsProvider.password ? self.credentialsProvider.password : @"";
-	NSString *challange = self.challangeStringOfRoundTrip1;
+    NSString *username = self.credentialsProvider.username ? self.credentialsProvider.username : @"";
+    NSString *password = self.credentialsProvider.password ? self.credentialsProvider.password : @"";
+    NSString *challange = self.challangeStringOfRoundTrip1;
 
-	/*
-	 perl script http://www.tjd.phlegethon.org/software/cram-md5.pl
+    /*
+     perl script http://www.tjd.phlegethon.org/software/cram-md5.pl
 
-	 my ($challenge, $username, $password) = @ARGV;
-	 my $response = hmac_md5_hex(decode_base64($challenge), $password);
-	 print encode_base64("$username $response");
-	 */
+     my ($challenge, $username, $password) = @ARGV;
+     my $response = hmac_md5_hex(decode_base64($challenge), $password);
+     print encode_base64("$username $response");
+     */
 
 
-	NSString *step1 = [[challange base64DecodedString] hmacMD5EncryptedStringWithSecret:password];
-	NSString *step2 = [NSString stringWithFormat:@"%@ %@", username, step1];
-	NSString *step3 = [step2 base64EncodedString];
+    NSString *step1 = [[challange base64DecodedString] hmacMD5EncryptedStringWithSecret:password];
+    NSString *step2 = [NSString stringWithFormat:@"%@ %@", username, step1];
+    NSString *step3 = [step2 base64EncodedString];
 
-	return step3;
+    return step3;
 }
 
 @end
@@ -282,12 +282,12 @@
 @implementation TBSMTPAuthenticatorLOGIN
 
 - (void)dealloc {
-	[_challangeStringOfRoundTrip1 release]; _challangeStringOfRoundTrip1 = nil;
-	[super dealloc];
+    [_challangeStringOfRoundTrip1 release]; _challangeStringOfRoundTrip1 = nil;
+    [super dealloc];
 }
 
 - (NSUInteger)numberOfRoundTrips {
-	return 2;
+    return 2;
 }
 
 

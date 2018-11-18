@@ -58,9 +58,9 @@
  */
 @interface TBSMTPAuthenticator : NSObject <TBSMTPAuthenticatorInterface> {
 
-	TBSMTPAuthenticationScheme _authenticatinScheme;
-	id<TBSMTPAuthenticatorCredentialsProvider> _credentialsProvider;
-	TBSMTPAuthenticationScheme _authenticationScheme;
+    TBSMTPAuthenticationScheme _authenticatinScheme;
+    id<TBSMTPAuthenticatorCredentialsProvider> _credentialsProvider;
+    TBSMTPAuthenticationScheme _authenticationScheme;
 }
 
 @property (readonly) NSUInteger numberOfRoundTrips;

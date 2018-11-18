@@ -12,58 +12,58 @@
 
 
 #if TARGET_OS_IPHONE
-	#if		__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_4_0
-		#define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	1
+    #if		__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_4_0
+        #define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	1
 
-	#elif	__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_5_0
-		#define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	0
+    #elif	__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_5_0
+        #define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	0
 
-	#else
-		#define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	0
-	#endif
+    #else
+        #define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	0
+    #endif
 
 #else
-	#if		MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_7
-		#define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	1
+    #if		MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_7
+        #define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	1
 
-	#else
-		#define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	0
-	#endif
+    #else
+        #define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	0
+    #endif
 #endif
 
 
 #if NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS
-	#import <RegexKit/RegexKit.h>
+    #import <RegexKit/RegexKit.h>
 #else
-	#import <Foundation/NSRegularExpression.h>
+    #import <Foundation/NSRegularExpression.h>
 #endif
 
 
 typedef enum {
-	TBSMTPResponseType_NOT_SPECIFIED					= 0,
+    TBSMTPResponseType_NOT_SPECIFIED					= 0,
 
-	TBSMTPResponseType_CONNECTION_ESTABLISHMENT		= (1 << 0),
-	TBSMTPResponseType_EHLO							= (1 << 1),
-	TBSMTPResponseType_HELO							= (1 << 2),
-	TBSMTPResponseType_AUTH							= (1 << 3),
-	TBSMTPResponseType_MAIL							= (1 << 4),
-	TBSMTPResponseType_RCPT							= (1 << 5),
-	TBSMTPResponseType_DATA							= (1 << 6),
-	TBSMTPResponseType_RSET							= (1 << 7),
-	TBSMTPResponseType_VRFY							= (1 << 8),
-	TBSMTPResponseType_EXPN							= (1 << 9),
-	TBSMTPResponseType_HELP							= (1 << 10),
-	TBSMTPResponseType_NOOP							= (1 << 11),
-	TBSMTPResponseType_QUIT							= (1 << 12),
+    TBSMTPResponseType_CONNECTION_ESTABLISHMENT		= (1 << 0),
+    TBSMTPResponseType_EHLO							= (1 << 1),
+    TBSMTPResponseType_HELO							= (1 << 2),
+    TBSMTPResponseType_AUTH							= (1 << 3),
+    TBSMTPResponseType_MAIL							= (1 << 4),
+    TBSMTPResponseType_RCPT							= (1 << 5),
+    TBSMTPResponseType_DATA							= (1 << 6),
+    TBSMTPResponseType_RSET							= (1 << 7),
+    TBSMTPResponseType_VRFY							= (1 << 8),
+    TBSMTPResponseType_EXPN							= (1 << 9),
+    TBSMTPResponseType_HELP							= (1 << 10),
+    TBSMTPResponseType_NOOP							= (1 << 11),
+    TBSMTPResponseType_QUIT							= (1 << 12),
 
 
-	TBSMTPResponseType_DATA_SEND						= TBSMTPResponseType_DATA | (1 << 16),	// subtag for DATA
+    TBSMTPResponseType_DATA_SEND						= TBSMTPResponseType_DATA | (1 << 16),	// subtag for DATA
 
-	// space for further constants
+    // space for further constants
 
-	TBSMTPResponseType_AUTH_RT1						= TBSMTPResponseType_AUTH | (1 << 24),	// subtag for Challange/Response RoundTrip
+    TBSMTPResponseType_AUTH_RT1						= TBSMTPResponseType_AUTH | (1 << 24),	// subtag for Challange/Response RoundTrip
 
-	// space for further constants
+    // space for further constants
 
 } TBSMTPResponseType;
 
@@ -73,11 +73,11 @@ typedef enum {
  @see TBSMTPResponseTests
  */
 @interface TBSMTPResponse : NSObject {
-	TBSMTPResponseType	_responseType;
-	NSInteger			_code;
-	NSString			*_message;
-	NSData				*_responseData;
-	NSStringEncoding	_usedEncoding;
+    TBSMTPResponseType	_responseType;
+    NSInteger			_code;
+    NSString			*_message;
+    NSData				*_responseData;
+    NSStringEncoding	_usedEncoding;
 }
 
 @property (readonly, assign) TBSMTPResponseType	responseType;		/**< Indicate the type this response belongs to */
@@ -104,7 +104,7 @@ typedef enum {
 /**
  
  @return Return an valid SMTP server response or nil if responseString is an
-	incomplete or invalid server response
+    incomplete or invalid server response
  */
 + (id)responseWithData:(NSData *)responseData andResponseType:(TBSMTPResponseType)responseType;
 
@@ -137,7 +137,7 @@ typedef enum {
  E: 550, 551, 552, 553, 450, 451, 452, 503, 550
  DATA
  I: 354 -> data ->	S: 250
-					E: 552, 554, 451, 452
+                    E: 552, 554, 451, 452
  E: 451, 554, 503
  RSET
  S: 250

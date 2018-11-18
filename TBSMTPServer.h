@@ -12,30 +12,30 @@
 
 
 #if TARGET_OS_IPHONE
-	#if		__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_4_0
-		#define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	1
+    #if		__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_4_0
+        #define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	1
 
-	#elif	__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_5_0
-		#define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	0
+    #elif	__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_5_0
+        #define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	0
 
-	#else
-		#define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	0
-	#endif
+    #else
+        #define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	0
+    #endif
 
 #else
-	#if		MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_7
-		#define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	1
+    #if		MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_7
+        #define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	1
 
-	#else
-		#define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	0
-	#endif
+    #else
+        #define NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS	0
+    #endif
 #endif
 
 
 #if NEEDS_REGEXKIT_FOR_REGULAR_EXPRESSIONS
-	#import <RegexKit/RegexKit.h>
+    #import <RegexKit/RegexKit.h>
 #else
-	#import <Foundation/NSRegularExpression.h>
+    #import <Foundation/NSRegularExpression.h>
 #endif
 
 
@@ -49,13 +49,13 @@
  */
 @interface TBSMTPServer : NSObject {
 
-	NSString *_hostname;
-	NSInteger _port;
-	BOOL _TLSServer;
-	NSString *_username;
-	NSString *_password;
-	NSInteger _supportedAuthenticationSchemes;
-	TBSMTPAuthenticationScheme _preferredAuthenticationScheme;
+    NSString *_hostname;
+    NSInteger _port;
+    BOOL _TLSServer;
+    NSString *_username;
+    NSString *_password;
+    NSInteger _supportedAuthenticationSchemes;
+    TBSMTPAuthenticationScheme _preferredAuthenticationScheme;
 
 
 }

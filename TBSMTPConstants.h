@@ -24,20 +24,20 @@ NSString * const kRequestEOM;			/**< End Of Message Delimiter used in SMTP Proto
  @todo: this is a list of authentication schemes of A1 (smtp.A1.net) and Swisscom (smtpauth.bluewin.ch)
  */
 typedef enum {
-	TBSMTPAuthenticationScheme_UNKNOWN			= -1,
+    TBSMTPAuthenticationScheme_UNKNOWN			= -1,
 
-	// group into secure / not-secure
-	TBSMTPAuthenticationScheme_NeedAuth			= 1,
+    // group into secure / not-secure
+    TBSMTPAuthenticationScheme_NeedAuth			= 1,
 
 
-	// no auth
+    // no auth
     TBSMTPAuthenticationScheme_None				= 0,
 
-	// need auth
+    // need auth
     TBSMTPAuthenticationScheme_Plain			= (1 << 3)	| TBSMTPAuthenticationScheme_NeedAuth,
     TBSMTPAuthenticationScheme_Login			= (1 << 4)	| TBSMTPAuthenticationScheme_NeedAuth,
     TBSMTPAuthenticationScheme_CRAM_MD5			= (1 << 5)	| TBSMTPAuthenticationScheme_NeedAuth,
-	TBSMTPAuthenticationScheme_DIGEST_MD5		= (1 << 6)	| TBSMTPAuthenticationScheme_NeedAuth
+    TBSMTPAuthenticationScheme_DIGEST_MD5		= (1 << 6)	| TBSMTPAuthenticationScheme_NeedAuth
 } TBSMTPAuthenticationScheme;
 
 
